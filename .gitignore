@@ -1,0 +1,42 @@
+node_modules
+.prettierrc
+.eslintrc.js
+.env
+dist
+
+photo-service-client/node_modules
+photo-service-client/.pnp
+.pnp.js
+.idea/
+photo-service-client/.idea/
+photo-service-client/public
+
+# testing
+photo-service-client/coverage
+
+# next.js
+photo-service-client/.next/
+photo-service-client/out/
+
+# production
+/photo-service-client/build
+
+# misc
+/photo-service-client/.DS_Store
+/photo-service-client/*.pem
+
+# debug
+/photo-service-client/npm-debug.log*
+/photo-service-client/yarn-debug.log*
+/photo-service-client/yarn-error.log*
+
+# local env files
+/photo-service-client/.env*.local
+
+# vercel
+/photo-service-client/.vercel
+
+# typescript
+/photo-service-client/*.tsbuildinfo
+/photo-service-client/next-env.d.ts
+

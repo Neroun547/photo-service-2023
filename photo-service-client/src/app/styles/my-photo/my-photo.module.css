@@ -1,0 +1,33 @@
+.upload-image-link {
+    display: block;
+    margin: 0 auto;
+    margin-top: 60px;
+    width: min-content;
+}
+
+.wrapper__photo {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 60px;
+    justify-items: center;
+    margin-top: 100px;
+}
+
+.wrapper__photo-item {
+    height: 250px;
+    width: auto;
+    border: 10px solid #fff;
+    transition: .2s;
+}
+
+.wrapper__photo-item:hover {
+    border-color: rgba(213,213,213,0.98);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.no-photo-logo {
+    text-align: center;
+    margin-top: 100px;
+}
+
