@@ -9,7 +9,7 @@ import {
     Res,
     Get,
     Param,
-    Delete
+    Delete, Patch
 } from "@nestjs/common";
 import {PhotoService} from "./service/photo.service";
 import {AuthGuard} from "../auth/guards/auth.guard";
@@ -18,6 +18,7 @@ import {UploadPhotoDto} from "./dto/upload-photo.dto";
 import { Request, Response } from "express";
 import { readFile } from "fs/promises";
 import { resolve } from "path";
+import {ChangePhotoThemeDto} from "./dto/change-photo-theme.dto";
 
 @Controller()
 export class PhotoController {
@@ -43,6 +44,11 @@ export class PhotoController {
         return await this.photoService.getPhotoByUserId(req["user"].id);
     }
 
+    @Get("random-photo")
+    async getRandomPhoto() {
+        return await this.photoService.getRandomPhoto();
+    }
+
     @Get(":filename")
     async getPhotoByFilename(@Param("filename") filename: string) {
         return await this.photoService.getPhotoByFilename(filename);
@@ -56,4 +62,11 @@ export class PhotoController {
         return;
     }
 
+    @UseGuards(AuthGuard)
+    @Patch(":filename")
+    async changePhotoThemeByFilenameAndUserId(@Req() req: Request, @Body() body: ChangePhotoThemeDto, @Param("filename") filename: string) {
+        await this.photoService.changePhotoThemeByFilenameAndUserId(req["user"].id, filename, body.theme);
+
+        return;
+    }
 }

@@ -17,8 +17,8 @@ import {PhotoModule} from "./photo/photo.module";
           port: Number(process.env.DB_PORT),
           password: process.env.DB_PASSWORD,
           type: "mysql",
-          autoLoadEntities: process.env.DB_AUTO_LOAD_ENTITY === "true",
-          forceUtcTimezone: true
+          autoLoadEntities: process.env.DB_AUTO_LOAD_ENTITIES === "true",
+          validateRequired: false
       }),
       SignupModule,
       AuthModule,

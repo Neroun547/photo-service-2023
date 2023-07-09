@@ -3,5 +3,5 @@ export interface PhotoInterface {
     theme: string;
     user_id: number;
     filename: string;
-    date: string;
+    date: Date | string;
 }

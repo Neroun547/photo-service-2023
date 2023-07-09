@@ -1,4 +1,4 @@
-import {Entity, ManyToOne, PrimaryKey, Property} from "@mikro-orm/core";
+import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
 import {PhotoInterface} from "./interfaces/photo.interface";
 import {Users} from "../users/users.entity";
 
@@ -17,7 +17,7 @@ export class Photo implements PhotoInterface {
     filename: string;
 
     @Property()
-    date: string;
+    date: Date | string;
 
     @ManyToOne({ entity: () => Users })
     user: Users;

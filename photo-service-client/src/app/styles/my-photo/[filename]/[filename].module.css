@@ -4,7 +4,7 @@
     margin-top: 100px;
 }
 
-.wrapper__image img {
+.wrapper__image-image {
     width: auto;
     height: 600px;
 }
@@ -55,4 +55,35 @@
     width: 87%;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.wrapper__image-info-download-photo-link-public {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: auto;
+    border: none;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    width: 87%;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.redact-theme-img {
+    width: 25px;
+    height: 25px;
+    margin-left: 15px;
+    margin-top: 10px;
+    transition: .2s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.redact-theme-img:hover {
+    background-color: rgba(159,159,159,0.98);
+    transition: .2s;
 }

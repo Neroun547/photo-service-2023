@@ -23,4 +23,10 @@ export class PhotoServiceDb {
     async deletePhotoByFilenameAndUserId(userId: number, filename: string) {
         await this.repository.nativeDelete({ user_id: userId, filename: filename });
     }
+    async changePhotoThemeByFilenameAndUserId(userId: number, filename: string, theme: string) {
+        await this.repository.nativeUpdate({ user_id: userId, filename: filename }, { theme: theme });
+    }
+    async getPhoto(count: number, skip: number) {
+        return await this.repository.find({}, { limit: count, offset: skip, })
+    }
 }

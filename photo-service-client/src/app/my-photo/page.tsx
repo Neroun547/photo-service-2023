@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import { checkToken } from "../auth/check-token/check-token";
 import Image from "next/image";
 import styles from "../styles/my-photo/my-photo.module.css";
+import photoComponent from "../styles/components/photo.module.css";
 import Link from "next/link";
 
 async function getPhoto() {
@@ -38,12 +39,12 @@ export default function MyPhoto() {
                 <Link className={styles["upload-image-link"]} href="/my-photo/upload-image">
                     <Image src="/upload-image.png" width={100} height={100}></Image>
                 </Link>
-                <div className={styles.wrapper__photo}>
+                <div className={photoComponent.wrapper__photo}>
                     {photo.map((el, i) => {
                         return (
 
                             <Link href={"/my-photo/" + el.filename}>
-                                <img src={"/images/" + el.filename} className={styles['wrapper__photo-item']} />
+                                <img src={"/images/" + el.filename} className={photoComponent['wrapper__photo-item']} />
                             </Link>
                         )
                     })}

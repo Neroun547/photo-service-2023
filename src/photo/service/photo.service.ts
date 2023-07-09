@@ -40,4 +40,11 @@ export class PhotoService {
 
         await this.photoServiceDb.deletePhotoByFilenameAndUserId(userId, filename);
     }
+    async changePhotoThemeByFilenameAndUserId(userId: number, filename: string, theme: string) {
+        await this.photoServiceDb.changePhotoThemeByFilenameAndUserId(userId, filename, theme);
+    }
+    async getRandomPhoto() {
+        // TODO not it's just take 10 photo ...
+        return await this.photoServiceDb.getPhoto(10, 0);
+    }
 }

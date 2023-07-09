@@ -9,7 +9,7 @@ photo-service-client/.pnp
 .pnp.js
 .idea/
 photo-service-client/.idea/
-photo-service-client/public
+photo-service-client/public/images
 
 # testing
 photo-service-client/coverage
