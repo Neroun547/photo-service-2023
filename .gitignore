@@ -10,6 +10,7 @@ photo-service-client/.pnp
 .idea/
 photo-service-client/.idea/
 photo-service-client/public/images
+photo-service-client/public/avatars
 
 # testing
 photo-service-client/coverage
