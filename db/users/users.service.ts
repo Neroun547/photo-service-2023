@@ -22,4 +22,7 @@ export class UsersServiceDb {
     async updateUserById(userId: number, newData: UsersInterface) {
         await this.repository.nativeUpdate({ id: userId }, { ...newData });
     }
+    async getUserById(id: number) {
+        return await this.repository.findOne({ id: id });
+    }
 }

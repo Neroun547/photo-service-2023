@@ -18,6 +18,6 @@ export class SignupService {
         }
         const hash = await argon.hash(user.password);
 
-        await this.usersServiceDb.saveUser({ username: user.username, email: user.email, password: hash });
+        await this.usersServiceDb.saveUser({ username: user.username, email: user.email, password: hash, avatar: null });
     }
 }

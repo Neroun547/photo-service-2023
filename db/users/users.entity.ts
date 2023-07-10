@@ -16,6 +16,9 @@ export class Users implements UsersInterface {
     @Property()
     password: string;
 
+    @Property({ nullable: true })
+    avatar: string;
+
     @OneToMany({ entity: () => Photo, mappedBy: "user" })
     photo: Collection<Photo>;
 }

@@ -8,11 +8,23 @@ import Image from "next/image";
 
 export default function DashboardLayout() {
     const [auth, setAuth] = useState(false);
+    const [avatar, setAvatar] = useState(false);
 
     useEffect(() => {
         checkToken(false)
             .then((value: boolean) => {
                 setAuth(value);
+            });
+        fetch("/api/users/", {
+            headers: {
+                authorization: "Bearer " + localStorage.getItem("token")
+            }
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setAvatar(data.avatar);
             })
     });
 
@@ -29,7 +41,7 @@ export default function DashboardLayout() {
                     <Link href="/" className={styles.link}>Main</Link>
                     <Link href="/my-photo" className={styles.link}>My photo</Link>
                     <Link href="/profile" className={styles.link}>
-                        <Image src="/profile.png" width={35} height={35}/>
+                        {avatar ? <Image src={"/avatars/" + avatar} width={35} height={35} style={{ borderRadius: "50%" }}/> : <Image src="/profile.png" width={35} height={35}/>}
                     </Link>
                     <button onClick={exit} className={styles.exit}>Exit</button>
                 </nav>

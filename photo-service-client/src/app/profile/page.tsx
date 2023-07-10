@@ -2,8 +2,8 @@
 
 import {FormEvent, useEffect, useState} from "react";
 import { checkToken } from "../auth/check-token/check-token";
-import styles from "../styles/profile/profile.module.css";
 import formComponent from "../styles/components/form.module.css";
+import styles from "../styles/profile/profile.module.css";
 
 async function getUserData() {
     const response = await fetch("/api/users", {
@@ -18,6 +18,10 @@ export default function Profile() {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [username, setUsername] = useState("");
+
+    const [avatar, setAvatar] = useState();
+    const [createObjectUrl, setCreateObjectUrl] = useState();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [changePassword, setChangePassword] = useState(false);
@@ -40,30 +44,63 @@ export default function Profile() {
         let response;
 
         if(changePassword) {
-            response = await fetch("/api/users", {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: "Bearer " + localStorage.getItem("token")
-                },
-                body: JSON.stringify({
-                    username: username,
-                    email: email,
-                    password: password
-                })
-            });
+            if(avatar) {
+                const formData = new FormData();
+
+                formData.append("username", username);
+                formData.append("email", email);
+                formData.append("password", password);
+                formData.append("avatar", avatar);
+
+                response = await fetch("/api/users", {
+                    method: "PATCH",
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("token")
+                    },
+                    body: formData
+                });
+            } else {
+                response = await fetch("/api/users", {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: "Bearer " + localStorage.getItem("token")
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password
+                    })
+                });
+            }
         } else {
-            response = await fetch("/api/users", {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: "Bearer " + localStorage.getItem("token")
-                },
-                body: JSON.stringify({
-                    username: username,
-                    email: email
-                })
-            });
+            if(avatar) {
+                const formData = new FormData();
+
+                formData.append("username", username);
+                formData.append("email", email);
+                formData.append("avatar", avatar);
+
+                response = await fetch("/api/users", {
+                    method: "PATCH",
+                    headers: {
+                        authorization: "Bearer " + localStorage.getItem("token")
+                    },
+                    body: formData
+                });
+            } else {
+                response = await fetch("/api/users", {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: "Bearer " + localStorage.getItem("token")
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email
+                    })
+                });
+            }
         }
         if(response.ok) {
             newToken = (await response.json()).token;
@@ -84,7 +121,14 @@ export default function Profile() {
     }
     return (
         <div>
+            {createObjectUrl ? <img src={createObjectUrl} className={styles["upload-avatar-image"]}></img> : ""}
             <form className={formComponent.wrapper__form} onSubmit={changeUserParams}>
+                <input type="file" onChange={(e) => {
+                    //@ts-ignore
+                    setAvatar(e.target.files[0])
+                    //@ts-ignore
+                    setCreateObjectUrl(URL.createObjectURL(e.target.files[0]));
+                }} required={false}/>
                 <input type="text" placeholder="Username:" value={username} onChange={(e) => setUsername(e.target.value)} required={true}/>
                 <input type="text" placeholder="Email:" value={email} onChange={(e) => setEmail(e.target.value)} required={true}/>
                 <button onClick={() => setChangePassword((prevState) => !prevState)} type="button">Change password</button>
