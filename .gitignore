@@ -6,8 +6,10 @@ dist
 
 photo-service-client/node_modules
 photo-service-client/.pnp
+
 .pnp.js
 .idea/
+
 photo-service-client/.idea/
 photo-service-client/public/images
 photo-service-client/public/avatars
