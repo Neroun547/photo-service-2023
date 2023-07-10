@@ -28,7 +28,7 @@ export class UsersService {
         if(user.password) {
             user.password = user.password.trim().replaceAll(" ", "");
 
-            if(typeof user.password === "string" && user.password.length < 6) {
+            if(user.password.length < 6) {
                 throw new BadRequestException({ message: "Password must have more then 5 characters" });
             }
             user.password = await argon.hash(user.password);
