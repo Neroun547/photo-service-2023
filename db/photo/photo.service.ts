@@ -20,6 +20,13 @@ export class PhotoServiceDb {
     async getPhotoByFilename(filename: string) {
         return await this.repository.findOne({ filename: filename });
     }
+    async getPhotoAndUserByFilename(filename: string) {
+        return await this.repository.createQueryBuilder()
+            .select("*")
+            .where("filename = ?", [filename])
+            .leftJoinAndSelect("user", "u")
+            .getResult()
+    }
     async deletePhotoByFilenameAndUserId(userId: number, filename: string) {
         await this.repository.nativeDelete({ user_id: userId, filename: filename });
     }
@@ -28,5 +35,11 @@ export class PhotoServiceDb {
     }
     async getPhoto(count: number, skip: number) {
         return await this.repository.find({}, { limit: count, offset: skip, })
+    }
+    async getPhotoLikeTheme(theme: string) {
+        return await this.repository.createQueryBuilder()
+            .select("*")
+            .where("theme LIKE ?", ["%" + theme + "%"])
+            .getResult();
     }
 }

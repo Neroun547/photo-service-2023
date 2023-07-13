@@ -10,7 +10,7 @@ export class UsersController {
     constructor(private usersService: UsersService) {}
 
     @UseGuards(AuthGuard)
-    @Get()
+    @Get("get-info-auth-user")
     async getUserData(@Req() req: Request) {
         return req["user"];
     }

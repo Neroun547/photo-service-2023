@@ -1,10 +1,10 @@
 "use client";
 
-import styles from "@/app/styles/my-photo/[filename]/[filename].module.css";
+import styles from "../../styles/my-photo/[filename]/[filename].module.css";
 import {useEffect, useState} from "react";
 
 export default function Photo({ params }: { params: { filename: string } }) {
-    const [photoInfo, setPhotoInfo] = useState({ theme: "", date: "" });
+    const [photoInfo, setPhotoInfo] = useState({ theme: "", date: "", user: { username: "", avatar: "", email: "" } });
 
     useEffect(() => {
         fetch("/api/photo/" + params.filename)
@@ -25,7 +25,14 @@ export default function Photo({ params }: { params: { filename: string } }) {
                         <strong>Theme photo: </strong>{photoInfo.theme}
                     </div>
                     <div className={styles["wrapper__image-info-date"]}><strong>Date: </strong>{photoInfo.date}</div>
-
+                    <div>
+                        <div className={styles["wrapper__image-info-author"]}>
+                            <h2>Author info:</h2>
+                            <img src={"/avatars/" + photoInfo.user.avatar} alt="Avatar"/>
+                            <span>{photoInfo.user.username}</span>
+                            <span>Email: {photoInfo.user.email}</span>
+                        </div>
+                    </div>
                     <a className={styles["wrapper__image-info-download-photo-link-public"]} download
                        href={"/api/photo/download/" + params.filename}>Download photo</a>
                 </div>

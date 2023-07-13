@@ -49,6 +49,11 @@ export class PhotoController {
         return await this.photoService.getRandomPhoto();
     }
 
+    @Get("by-theme/:theme")
+    async getPhotoByTheme(@Param("theme") theme: string) {
+        return await this.photoService.getPhotoByTheme(theme);
+    }
+
     @Get(":filename")
     async getPhotoByFilename(@Param("filename") filename: string) {
         return await this.photoService.getPhotoByFilename(filename);

@@ -6,7 +6,7 @@ import formComponent from "../styles/components/form.module.css";
 import styles from "../styles/profile/profile.module.css";
 
 async function getUserData() {
-    const response = await fetch("/api/users", {
+    const response = await fetch("/api/users/get-info-auth-user", {
         headers: {
             authorization: "Bearer " + localStorage.getItem("token")
         }

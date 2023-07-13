@@ -1,4 +1,4 @@
-import {BadRequestException, Injectable} from "@nestjs/common";
+import {BadRequestException, Injectable, NotFoundException} from "@nestjs/common";
 import { writeFile, unlink } from "fs/promises";
 import { resolve } from "path";
 import {UploadPhotoDto} from "../dto/upload-photo.dto";
@@ -28,8 +28,11 @@ export class PhotoService {
         return await this.photoServiceDb.getPhotoByUserId(userId);
     }
     async getPhotoByFilename(filename: string) {
-        const data = JSON.parse(JSON.stringify(await this.photoServiceDb.getPhotoByFilename(filename)));
+        const data = JSON.parse(JSON.stringify((await this.photoServiceDb.getPhotoAndUserByFilename(filename))[0]));
 
+        if(!data) {
+            throw new NotFoundException();
+        }
         delete data.user.password;
         data.date = Moment(data.date).format("YYYY-MM-DD");
 
@@ -44,7 +47,10 @@ export class PhotoService {
         await this.photoServiceDb.changePhotoThemeByFilenameAndUserId(userId, filename, theme);
     }
     async getRandomPhoto() {
-        // TODO not it's just take 10 photo ...
+        // TODO it's just take 10 photo ...
         return await this.photoServiceDb.getPhoto(10, 0);
+    }
+    async getPhotoByTheme(theme: string) {
+        return await this.photoServiceDb.getPhotoLikeTheme(theme);
     }
 }

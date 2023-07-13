@@ -87,3 +87,21 @@
     background-color: rgba(159,159,159,0.98);
     transition: .2s;
 }
+
+.wrapper__image-info-author {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-top: 60px;
+    font-size: 20px;
+}
+
+.wrapper__image-info-author span {
+    margin-top: 20px;
+}
+
+.wrapper__image-info-author img {
+    width: 160px;
+    border-radius: 50%;
+}
+

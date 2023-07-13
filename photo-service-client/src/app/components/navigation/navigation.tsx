@@ -15,7 +15,7 @@ export default function DashboardLayout() {
             .then((value: boolean) => {
                 setAuth(value);
             });
-        fetch("/api/users/", {
+        fetch("/api/users/get-info-auth-user", {
             headers: {
                 authorization: "Bearer " + localStorage.getItem("token")
             }
