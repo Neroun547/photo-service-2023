@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Patch, Req, UploadedFile, UseGuards, UseInterceptors} from "@nestjs/common";
+import {Body, Controller, Get, Param, Patch, Req, UploadedFile, UseGuards, UseInterceptors} from "@nestjs/common";
 import {UsersService} from "./service/users.service";
 import {Request} from "express";
 import {AuthGuard} from "../auth/guards/auth.guard";
@@ -13,6 +13,11 @@ export class UsersController {
     @Get("get-info-auth-user")
     async getUserData(@Req() req: Request) {
         return req["user"];
+    }
+
+    @Get(":username")
+    async getUserInfo(@Param("username") username: string) {
+        return await this.usersService.getUserInfoByUsername(username);
     }
 
     @UseGuards(AuthGuard)

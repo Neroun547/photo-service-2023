@@ -4,10 +4,14 @@ import { resolve } from "path";
 import {UploadPhotoDto} from "../dto/upload-photo.dto";
 import {PhotoServiceDb} from "../../../db/photo/photo.service";
 import * as Moment from "moment";
+import {UsersServiceDb} from "../../../db/users/users.service";
 
 @Injectable()
 export class PhotoService {
-    constructor(private photoServiceDb: PhotoServiceDb) {}
+    constructor(
+        private photoServiceDb: PhotoServiceDb,
+        private usersServiceDb: UsersServiceDb
+    ) {}
 
     async uploadPhoto(userId: number, file, body: UploadPhotoDto) {
 
@@ -52,5 +56,10 @@ export class PhotoService {
     }
     async getPhotoByTheme(theme: string) {
         return await this.photoServiceDb.getPhotoLikeTheme(theme);
+    }
+    async getPhotoByUsername(username: string) {
+        const userId = (await this.usersServiceDb.getUserByUsername(username)).id;
+
+        return await this.photoServiceDb.getPhotoByUserId(userId);
     }
 }

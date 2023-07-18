@@ -25,4 +25,7 @@ export class UsersServiceDb {
     async getUserById(id: number) {
         return await this.repository.findOne({ id: id });
     }
+    async getUserByUsername(username: string) {
+        return await this.repository.findOne({ username: username });
+    }
 }

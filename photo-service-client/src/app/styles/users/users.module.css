@@ -1,0 +1,21 @@
+.wrapper__author-photo-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.wrapper__author-photo-info span {
+    margin-top: 10px;
+}
+
+.wrapper__author-photo-info img {
+    border-radius: 50%;
+    width: 300px;
+    display: block;
+    margin: 0 auto;
+}

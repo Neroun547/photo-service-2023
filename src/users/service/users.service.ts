@@ -49,4 +49,12 @@ export class UsersService {
 
         return await this.jwtService.signAsync({ id: userById.id, username: userById.username, email: userById.email, avatar: userById.avatar });
     }
+
+    async getUserInfoByUsername(username: string) {
+        const data = JSON.parse(JSON.stringify(await this.usersServiceDb.getUserByUsername(username)));
+
+        delete data.password;
+
+        return data;
+    }
 }

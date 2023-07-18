@@ -3,6 +3,7 @@
 import styles from "../../styles/my-photo/[filename]/[filename].module.css";
 import {useEffect, useState} from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Photo({ params }: { params: { filename: string } }) {
     const [photoInfo, setPhotoInfo] = useState({ theme: "", date: "", user: { username: "", avatar: "", email: "" } });
@@ -30,7 +31,7 @@ export default function Photo({ params }: { params: { filename: string } }) {
                         <div className={styles["wrapper__image-info-author"]}>
                             <h2>Author info:</h2>
                             { photoInfo.user.avatar ? <img src={"/avatars/" + photoInfo.user.avatar} alt="Avatar"/> : <img src="/profile.png"/>}
-                            <span>{photoInfo.user.username}</span>
+                            <Link href={"/users/" + photoInfo.user.username}>{photoInfo.user.username}</Link>
                             <span>Email: {photoInfo.user.email}</span>
                         </div>
                     </div>
