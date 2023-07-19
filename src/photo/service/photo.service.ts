@@ -28,8 +28,8 @@ export class PhotoService {
             theme: body.theme
         });
     }
-    async getPhotoByUserId(userId: number) {
-        return await this.photoServiceDb.getPhotoByUserId(userId);
+    async getPhotoByUserId(userId: number, count: number, skip: number) {
+        return await this.photoServiceDb.getPhotoByUserId(userId, count, skip);
     }
     async getPhotoByFilename(filename: string) {
         const data = JSON.parse(JSON.stringify((await this.photoServiceDb.getPhotoAndUserByFilename(filename))[0]));
@@ -50,16 +50,16 @@ export class PhotoService {
     async changePhotoThemeByFilenameAndUserId(userId: number, filename: string, theme: string) {
         await this.photoServiceDb.changePhotoThemeByFilenameAndUserId(userId, filename, theme);
     }
-    async getRandomPhoto() {
-        // TODO it's just take 10 photo ...
-        return await this.photoServiceDb.getPhoto(10, 0);
+    async getRandomPhoto(count: number, skip: number) {
+        // TODO
+        return await this.photoServiceDb.getPhoto(count, skip);
     }
-    async getPhotoByTheme(theme: string) {
-        return await this.photoServiceDb.getPhotoLikeTheme(theme);
+    async getPhotoByTheme(theme: string, count: number, skip: number) {
+        return await this.photoServiceDb.getPhotoLikeTheme(theme, count, skip);
     }
-    async getPhotoByUsername(username: string) {
+    async getPhotoByUsername(username: string, count: number, skip: number) {
         const userId = (await this.usersServiceDb.getUserByUsername(username)).id;
 
-        return await this.photoServiceDb.getPhotoByUserId(userId);
+        return await this.photoServiceDb.getPhotoByUserId(userId, count, skip);
     }
 }

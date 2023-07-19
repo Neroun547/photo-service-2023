@@ -23,3 +23,16 @@
     text-align: center;
     margin-top: 100px;
 }
+
+.load-more-btn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 0px;
+    margin-top: 50px;
+    border: none;
+    background-color: #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}

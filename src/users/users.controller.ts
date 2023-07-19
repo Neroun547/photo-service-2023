@@ -1,4 +1,15 @@
-import {Body, Controller, Get, Param, Patch, Req, UploadedFile, UseGuards, UseInterceptors} from "@nestjs/common";
+import {
+    Body,
+    Controller,
+    Get,
+    Param, ParseIntPipe,
+    Patch,
+    Query,
+    Req,
+    UploadedFile,
+    UseGuards,
+    UseInterceptors
+} from "@nestjs/common";
 import {UsersService} from "./service/users.service";
 import {Request} from "express";
 import {AuthGuard} from "../auth/guards/auth.guard";
@@ -16,7 +27,9 @@ export class UsersController {
     }
 
     @Get(":username")
-    async getUserInfo(@Param("username") username: string) {
+    async getUserInfo(
+        @Param("username") username: string
+    ) {
         return await this.usersService.getUserInfoByUsername(username);
     }
 

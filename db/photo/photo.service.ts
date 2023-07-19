@@ -11,10 +11,12 @@ export class PhotoServiceDb {
     async savePhoto(photo: PhotoInterface) {
         await this.repository.nativeInsert({  ...photo });
     }
-    async getPhotoByUserId(userId: number) {
+    async getPhotoByUserId(userId: number, count: number, skip: number) {
         return await this.repository.createQueryBuilder()
             .select("*")
             .where("user_id = ?", [userId])
+            .limit(count)
+            .offset(skip)
             .getResult();
     }
     async getPhotoByFilename(filename: string) {
@@ -36,10 +38,12 @@ export class PhotoServiceDb {
     async getPhoto(count: number, skip: number) {
         return await this.repository.find({}, { limit: count, offset: skip, })
     }
-    async getPhotoLikeTheme(theme: string) {
+    async getPhotoLikeTheme(theme: string, count: number, skip: number) {
         return await this.repository.createQueryBuilder()
             .select("*")
             .where("theme LIKE ?", ["%" + theme + "%"])
+            .limit(count)
+            .offset(skip)
             .getResult();
     }
 }

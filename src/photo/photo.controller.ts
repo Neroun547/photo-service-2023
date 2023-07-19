@@ -9,7 +9,7 @@ import {
     Res,
     Get,
     Param,
-    Delete, Patch
+    Delete, Patch, Query, ParseIntPipe
 } from "@nestjs/common";
 import {PhotoService} from "./service/photo.service";
 import {AuthGuard} from "../auth/guards/auth.guard";
@@ -40,23 +40,38 @@ export class PhotoController {
 
     @UseGuards(AuthGuard)
     @Get("user-photo")
-    async getUserPhoto(@Req() req: Request) {
-        return await this.photoService.getPhotoByUserId(req["user"].id);
+    async getUserPhoto(
+        @Req() req: Request,
+        @Query("count", new ParseIntPipe()) count: number,
+        @Query("skip", new ParseIntPipe()) skip: number
+    ) {
+        return await this.photoService.getPhotoByUserId(req["user"].id, count, skip);
     }
 
     @Get("random-photo")
-    async getRandomPhoto() {
-        return await this.photoService.getRandomPhoto();
+    async getRandomPhoto(
+        @Query("count", new ParseIntPipe()) count: number,
+        @Query("skip", new ParseIntPipe()) skip: number
+    ) {
+        return await this.photoService.getRandomPhoto(count, skip);
     }
 
     @Get("by-username/:username")
-    async getPhotoByUsername(@Param("username") username: string) {
-        return await this.photoService.getPhotoByUsername(username);
+    async getPhotoByUsername(
+        @Param("username") username: string,
+        @Query("count", new ParseIntPipe()) count: number,
+        @Query("skip", new ParseIntPipe()) skip: number
+    ) {
+        return await this.photoService.getPhotoByUsername(username, count, skip);
     }
 
     @Get("by-theme/:theme")
-    async getPhotoByTheme(@Param("theme") theme: string) {
-        return await this.photoService.getPhotoByTheme(theme);
+    async getPhotoByTheme(
+        @Param("theme") theme: string,
+        @Query("count", new ParseIntPipe()) count: number,
+        @Query("skip", new ParseIntPipe()) skip: number
+    ) {
+        return await this.photoService.getPhotoByTheme(theme, count, skip);
     }
 
     @Get(":filename")
