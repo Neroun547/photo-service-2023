@@ -63,6 +63,14 @@ export default function Main() {
             }
             setPhoto((prevState) => [...prevState, ...data]);
             setSkipPhoto((prevState: number) => prevState + 10);
+        } else {
+            const data = await getPhoto(10, skipPhoto);
+
+            if (data.length < 10) {
+                setLoadMorePhotoState(false);
+            }
+            setPhoto((prevState) => [...prevState, ...data]);
+            setSkipPhoto((prevState: number) => prevState + 10);
         }
     }
 
