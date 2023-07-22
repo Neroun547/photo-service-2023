@@ -20,7 +20,7 @@ async function getPhoto(username: string, count: number, skip: number) {
 export default function User({ params }: { params: { username: string } }) {
     const [loadMorePhotoState, setLoadMorePhotoState] = useState(false);
     const [skipPhoto, setSkipPhoto] = useState(0);
-    const [photo, setPhoto] = useState([]);
+    const [photo, setPhoto] = useState<never[] | any[]>([]);
     const [loading, setLoading] = useState(true);
     const [userInfo, setUserInfo] = useState({ username: "", email: "", avatar: "" });
 

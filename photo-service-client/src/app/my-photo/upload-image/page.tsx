@@ -16,7 +16,9 @@ export default function uploadImage() {
 
         const formData = new FormData();
 
+        //@ts-ignore
         formData.append("theme", theme);
+        //@ts-ignore
         formData.append("image", file);
 
         const response = await fetch("/api/photo/", {

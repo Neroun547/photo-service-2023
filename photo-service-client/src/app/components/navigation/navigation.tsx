@@ -41,7 +41,7 @@ export default function DashboardLayout() {
                     <Link href="/" className={styles.link}>Main</Link>
                     <Link href="/my-photo" className={styles.link}>My photo</Link>
                     <Link href="/profile" className={styles.link}>
-                        {avatar ? <Image src={"/avatars/" + avatar} width={35} height={35} style={{ borderRadius: "50%" }}/> : <Image src="/profile.png" width={35} height={35}/>}
+                        {avatar ? <Image alt="Avatar" src={"/avatars/" + avatar} width={35} height={35} style={{ borderRadius: "50%" }}/> : <Image alt="Avatar" src="/profile.png" width={35} height={35}/>}
                     </Link>
                     <button onClick={exit} className={styles.exit}>Exit</button>
                 </nav>

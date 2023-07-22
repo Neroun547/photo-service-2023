@@ -1,4 +1,4 @@
-export async function checkToken(redirect=true): Promise<boolean | undefined> {
+export async function checkToken(redirect=true): Promise<boolean> {
 
     if(!redirect) {
         const response = await fetch("/api/auth", {
@@ -16,8 +16,10 @@ export async function checkToken(redirect=true): Promise<boolean | undefined> {
     });
 
     if(response.ok) {
-        return
+        return true;
     } else {
         window.location.href = "/auth";
+
+        return false;
     }
 }

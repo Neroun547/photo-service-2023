@@ -20,7 +20,7 @@ async function getPhoto(count: number, skip: number) {
 export default function MyPhoto() {
     const [loadMorePhotoState, setLoadMorePhotoState] = useState(false);
     const [skipPhoto, setSkipPhoto] = useState(0);
-    const [photo, setPhoto] = useState([]);
+    const [photo, setPhoto] = useState<never[] | any[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -49,14 +49,14 @@ export default function MyPhoto() {
             setLoadMorePhotoState(false);
         }
         setSkipPhoto((prevState: number) => prevState + 10);
-        setPhoto((prevState) => [...prevState, ...data]);
+        setPhoto((prevState: any[]) => [...prevState, ...data]);
     }
 
     if(photo.length) {
         return (
             <div>
                 <Link className={styles["upload-image-link"]} href="/my-photo/upload-image">
-                    <Image src="/upload-image.png" width={100} height={100}></Image>
+                    <Image alt="Photo" src="/upload-image.png" width={100} height={100}></Image>
                 </Link>
                 <div className={photoComponent.wrapper__photo}>
                     {photo.map((el, i) => {
@@ -78,7 +78,7 @@ export default function MyPhoto() {
         return (
             <div>
                 <Link className={styles["upload-image-link"]} href="/my-photo/upload-image">
-                    <Image src="/upload-image.png" width={100} height={100}></Image>
+                    <Image alt="Photo" src="/upload-image.png" width={100} height={100}></Image>
                 </Link>
                 <h2  className={styles["no-photo-logo"]}>You don't have photo ...</h2>
             </div>

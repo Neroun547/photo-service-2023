@@ -4,6 +4,7 @@ import styles from "./styles/main-page.module.css";
 import photoComponent from "./styles/components/photo.module.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import {FormEvent} from "react/ts5.0";
 
 async function getPhoto(count: number, skip: number) {
     const response = await fetch(`/api/photo/random-photo/?count=${count}&skip=${skip}`);
@@ -18,11 +19,11 @@ async function getPhotoByTheme(theme: string, count: number, skip: number) {
 }
 
 export default function Main() {
-    const [loadMorePhotoState, setLoadMorePhotoState] = useState(false);
-    const [skipPhoto, setSkipPhoto] = useState(0);
-    const [loading, setLoading] = useState(true);
-    const [photo, setPhoto] = useState([]);
-    const [theme, setTheme] = useState("");
+    const [loadMorePhotoState, setLoadMorePhotoState] = useState<boolean>(false);
+    const [skipPhoto, setSkipPhoto] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [photo, setPhoto] = useState<never[] | any[]>([]);
+    const [theme, setTheme] = useState<string>("");
 
     useEffect(() => {
         getPhoto(10, skipPhoto)
@@ -39,7 +40,7 @@ export default function Main() {
             });
     }, []);
 
-    const searchPhotoByTheme = async (e) => {
+    const searchPhotoByTheme = async (e: FormEvent) => {
         e.preventDefault();
 
         const data = await getPhotoByTheme(theme, 10, 0);
