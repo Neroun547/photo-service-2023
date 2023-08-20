@@ -11,7 +11,7 @@ export class UsersService {
     constructor(private usersServiceDb: UsersServiceDb, private jwtService: JwtService) {}
 
     async updateUser(user: UpdateUserInterface, file?): Promise<string> {
-        const userWithTheSameEmailOrUsername = await this.usersServiceDb.getUserByUsernameOrEmail(user.username, user.email);
+        const userWithTheSameEmailOrUsername = (await this.usersServiceDb.getUserByUsernameOrEmail(user.username, user.email)).filter((el) => el.id !== user.id);
 
         if(userWithTheSameEmailOrUsername.length
             && userWithTheSameEmailOrUsername[0].username === user.username
