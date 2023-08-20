@@ -15,13 +15,11 @@ export class UsersService {
 
         if(userWithTheSameEmailOrUsername.length
             && userWithTheSameEmailOrUsername[0].username === user.username
-            && userWithTheSameEmailOrUsername[0].id !== user.id
         ) {
             throw new BadRequestException({ message: "User with the same username already exist" });
         }
         if(userWithTheSameEmailOrUsername.length
             && userWithTheSameEmailOrUsername[0].email === user.email
-            && userWithTheSameEmailOrUsername[0].id !== user.id
         ) {
             throw new BadRequestException({ message: "User with the same email already exist" });
         }
