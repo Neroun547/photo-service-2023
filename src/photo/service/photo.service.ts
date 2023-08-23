@@ -43,9 +43,11 @@ export class PhotoService {
         return data;
     }
     async deletePhotoByFilename(userId: number, filename: string) {
-        await unlink(resolve("photo-service-client/public/images/" + filename));
-
-        await this.photoServiceDb.deletePhotoByFilenameAndUserId(userId, filename);
+        if(await this.photoServiceDb.deletePhotoByFilenameAndUserIdAndReturn(userId, filename)) {
+            await unlink(resolve("photo-service-client/public/images/" + filename));
+        } else {
+            throw new NotFoundException();
+        }
     }
     async changePhotoThemeByFilenameAndUserId(userId: number, filename: string, theme: string) {
         await this.photoServiceDb.changePhotoThemeByFilenameAndUserId(userId, filename, theme);

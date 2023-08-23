@@ -29,8 +29,8 @@ export class PhotoServiceDb {
             .leftJoinAndSelect("user", "u")
             .getResult()
     }
-    async deletePhotoByFilenameAndUserId(userId: number, filename: string) {
-        await this.repository.nativeDelete({ user_id: userId, filename: filename });
+    async deletePhotoByFilenameAndUserIdAndReturn(userId: number, filename: string) {
+        return await this.repository.nativeDelete({ user_id: userId, filename: filename });
     }
     async changePhotoThemeByFilenameAndUserId(userId: number, filename: string, theme: string) {
         await this.repository.nativeUpdate({ user_id: userId, filename: filename }, { theme: theme });
